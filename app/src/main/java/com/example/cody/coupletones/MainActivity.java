@@ -10,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.graphics.Typeface;
+import android.widget.Toast;
+import android.widget.Button;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,14 +20,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
+
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf");
         TextView title = (TextView) findViewById(R.id.title);
         TextView button = (TextView) findViewById(R.id.button);
-        title.setTypeface(font);
-        button.setTypeface(font);
+        if(title != null) title.setTypeface(font);
+        if(button != null) button.setTypeface(font);
+
+        Button login = (Button) findViewById(R.id.button);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(MainActivity.this, HomePage.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -42,10 +55,16 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.profile) {
+            Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void loginClick(View v)
+    {
+        Toast.makeText(getBaseContext(), "Test", Toast.LENGTH_LONG).show();
     }
 }
