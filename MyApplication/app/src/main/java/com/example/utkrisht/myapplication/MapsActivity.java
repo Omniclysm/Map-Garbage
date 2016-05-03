@@ -1,4 +1,5 @@
-package com.example.utkrisht.map2;
+package com.example.utkrisht.myapplication;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,19 +27,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private LocationListener locationListener;
     public LatLng LatLng;
-    public double lastKnownLat;
-    public double lastKnownLong;
-    public HashMap myFavLocs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +47,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                //mMap.clear();
-                //mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),
-                //        location.getLongitude())).title("Current location"));
-                lastKnownLat = location.getLatitude();
-                lastKnownLong = location.getLongitude();
+                LatLng = new LatLng(location.getLatitude(), location.getLongitude());
             }
 
             @Override
@@ -74,10 +66,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         };
-        //param1: provider = GPS
-        //param2: minTime = 120000 milliseconds between location refresh
-        //param3: minDistnace = meters of change required to update location (161 meters = 1/10 of mile in meters
-        //param4:
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -97,6 +85,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             return;
         }
+        //param1: provider = GPS
+        //param2: minTime = 120000 milliseconds between location refresh
+        //param3: minDistnace = meters of change required to update location (161 meters = 1/10 of mile in meters
+        //param4:
         locationManager.requestLocationUpdates("gps", 120000, 0, locationListener);
     }
 
@@ -115,9 +107,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(55,37);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("My location"));
-
+        LatLng sydney = new LatLng(34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("My location"));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
