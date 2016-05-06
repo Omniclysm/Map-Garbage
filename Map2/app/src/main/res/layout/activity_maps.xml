@@ -1,5 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,8 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.utkrisht.map2.MapsActivity" />
+    tools:context="com.example.utkrisht.map2.MapsActivity"
+    tools:layout="@layout/abc_action_bar_title_item" />
 
     <Button
         android:layout_width="wrap_content"
@@ -20,5 +22,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="39dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameLoc"
+        android:text="Name of Location"
+        android:layout_above="@+id/markFavLoc"
+        android:layout_alignEnd="@+id/markFavLoc"
+        android:layout_alignStart="@+id/markFavLoc" />
 
 </RelativeLayout>
